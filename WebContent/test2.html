@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Using ActiveMQ</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- compiled CSS -->
+<link rel="stylesheet" type="text/css" href="minified/css/app.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="minified/css/vendor.min.css" />
+	
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+
+<script type="text/javascript">
+	var subid = 'clientsubid1';
+	var client;
+	var msgCallback = function(message) {
+		// called when the client receives a STOMP message from the server
+		var p = document.createElement('p');
+		if (message.body) {
+			p.textContent = message.body;
+		} else {
+			p.textContent = 'received empty message';
+		}
+		document.getElementById('messages-id').appendChild(p);
+	}
+	function wsOpen() {
+		var url = "wss://localhost:6443/tems/pushchannel";
+		client = Stomp.client(url);
+		var subscribtion;
+		client.connect([], function() {
+			console.log('Connected to the server');
+			subscription = client.subscribe('/queue/test1', msgCallback, {
+				id : subid
+			});
+		});
+		
+//        client.send("/app/pushchannel", {}, JSON.stringify({ 'test1': 'abc' }));
+        client.send("/app/pushchannel", {}, "test1");
+
+	}
+	
+	function sendMsg() {
+//        client.send("/app/pushchannel", {}, JSON.stringify({ 'test1': 'abc' }));
+        client.send("/app/pushchannel", {}, "test1");
+
+	}
+	function clearMsgs() {
+		document.getElementById('messages-id').innerHTML = '';
+	}
+</script>
+</head>
+<body id="app-container-div">
+	<p>
+		Click on the link to open websocket: <a href="#" onclick="wsOpen();">wss://localhost:6443/tems/pushchannel</a>
+	</p>
+	<p>Click here to <a href="#" onclick="clearMsgs();">clear</a> messages</p>
+	<p>Click here to <a href="#" onclick="sendMsg();">send</a> messages</p>
+
+	<p>Messages pushed from the backend:</p>
+	<div id="messages-id"></div>
+</body>
+</html>
