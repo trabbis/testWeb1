@@ -1,6 +1,7 @@
 "use strict";
 
-var test1 = null;
+var test01 = null;
+var test02 = null;
 
 var counter = (function () {
 
