@@ -2,7 +2,6 @@
 
 var test01 = null;
 var test02 = null;
-var test03 = null;
 
 
 var counter = (function () {
