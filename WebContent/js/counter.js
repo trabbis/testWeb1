@@ -1,5 +1,7 @@
 "use strict";
- 
+
+var test1 = null;
+
 var counter = (function () {
 
     var add = function(num1, num2) {
@@ -24,5 +26,7 @@ var counter = (function () {
         difference: difference
     };
 
- 
+var test2 = null;
+
+    
 } ());
