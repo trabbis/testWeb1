@@ -1,0 +1,128 @@
+<span class="page-title" translate>{{pageSubtitle}}</span><br/>
+
+<div class="infopanel user-edit">
+    <div style="float: right;" class="clearfix">
+        <button type="button" ng-click="onChangePassword(selectedUser)" ng-show="isEditLoggedUser(selectedUser)" class="btn btn-link" translate="users.changePassword"></button>
+        <button type="button" ng-click="onSaveUser()" ng-disabled="userForm.$invalid" class="btn btn-link" translate="LINK_SAVE"></button>
+    </div>
+
+    <div class="avatar-group" ng-show="selectedUser.id != -1">
+        <div class="thumbnail">
+            <img ng-src="{{avatarUrl}}" alt="Avatar.jpg"/>
+        </div>
+        <div class="form-group has-error">
+            <div class="help-block" style="padding: 4px;" ng-show="avatarUploadFailure" translate="users.avatarUploadFailure"></div>
+        </div>
+        <!--<div ng-show="isUserNotNew(selectedUser)">-->
+        <div>
+            <uib-progressbar class="progress-striped active" style="height: 0.5em; margin-bottom: 1px;" max="100" value="avatarUploadProgressPercentage"/>
+            <a href="" style="position: absolute; padding: 4px; left: 0px;" ng-click="onDeleteAvatar()" translate="LINK_DELETE"></a>
+            <a href="" style="position: absolute; padding: 4px; right: 0px;" ng-file-select ng-file-change="upload($files)" translate="LINK_SET"></a>
+        </div>
+    </div>
+    <div class="info-group">
+        <!--<form class="form-horizontal" role="form">-->
+        <div class="form-horizontal">
+            <form name="userForm" novalidate>
+                <div class="form-group has-feedback"
+                     ng-class="userForm.loginId.$error.maxlength || userForm.loginId.$error.pattern || loginIdExists || (userForm.loginId.$error.required && userForm.loginId.required) ? 'has-error' : '' ">
+                    <label class="control-label col-sm-3" for="loginId" translate="users.loginIdLabel"></label>
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="loginId" name="loginId" ng-model="selectedUser.loginId"
+                               ng-pattern="/^[a-zA-Z0-9]/" ng-maxlength="64" required ng-blur="userForm.loginId.required=true;loginIdExists=false;"
+                               ng-disabled="selectedUser.id != -1"
+                               placeholder="{{'users.enterUsername' | translate}}" aria-describedby="loginIdRequiredStatus"/>
+                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+                        <span id="loginIdRequiredStatus" class="sr-only"></span>
+                        <span class="help-block" ng-show="userForm.loginId.$error.maxlength" translate="users.invalidLoginIdLength"></span>
+                        <span class="help-block" ng-show="userForm.loginId.$error.pattern" translate="users.invalidLoginIdPattern"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="userForm.firstName.$error.maxlength || (userForm.firstName.$error.required && userForm.firstName.required) ? 'has-error' : '' ">
+                    <label class="control-label col-sm-3" for="firstName" translate="users.firstNameLabel"></label>
+
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" id="firstName" name="firstName" ng-model="selectedUser.firstName"
+                               ng-maxlength="80" placeholder="{{'users.enterFirstName' | translate}}" required ng-blur="userForm.firstName.required=true;"
+                               aria-describedby="firstNameRequiredStatus"/>
+                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+                        <span id="firstNameRequiredStatus" class="sr-only"></span>
+                        <span class="help-block" ng-show="userForm.firstName.$error.maxlength" translate="users.invalidFirstNameLength"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="userForm.lastName.$error.maxlength || (userForm.lastName.$error.required && userForm.lastName.required) ? 'has-error' : '' ">
+                    <label class="control-label col-sm-3" for="lastName" translate="users.lastNameLabel"></label>
+
+                    <div class="col-sm-9">
+                        <input class="form-control" type="text" id="lastName" name="lastName" ng-model="selectedUser.lastName"
+                               ng-maxlength="80" placeholder="{{'users.enterLastName' | translate}}" required ng-blur="userForm.lastName.required=true;"
+                               aria-describedby="lastNameRequiredStatus"/>
+                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+                        <span id="lastNameRequiredStatus" class="sr-only"></span>
+                        <span class="help-block" ng-show="userForm.lastName.$error.maxlength" translate="users.invalidLastNameLength"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback"
+                     ng-class="userForm.email.$error.maxlength || userForm.email.$error.pattern || (userForm.email.$error.required && userForm.email.required) ? 'has-error' : '' ">
+                    <label class="control-label col-sm-3" for="email" translate="users.emailLabel"></label>
+
+                    <div class="col-sm-9">
+                        <input class="form-control" type="email" id="email" name="email" ng-model="selectedUser.email"
+                               ng-pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/" ng-maxlength="80"
+                               placeholder="{{'users.enterEmail' | translate}}" required ng-blur="userForm.email.required=true;"
+                               aria-describedby="emailRequiredStatus"/>
+                        <span class="glyphicon glyphicon-asterisk form-control-feedback" aria-hidden="true"></span>
+                        <span id="emailRequiredStatus" class="sr-only"></span>
+                        <span class="help-block" ng-show="userForm.email.$error.maxlength" translate="users.invalidEmailLength"></span>
+                        <span class="help-block" ng-show="userForm.email.$error.email" translate="users.invalidEmailFormat"></span>
+                        <span class="help-block" ng-show="userForm.email.$error.pattern" translate="users.invalidEmailFormat"></span>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="isUserNotNew(selectedUser)">
+                    <label class="control-label col-sm-3" translate="users.stateLabel"></label>
+
+                    <div class="col-sm-9">
+                        <label class="control-label" translate="userState.{{selectedUser.state}}"></label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="enabled" translate="users.enabledLabel"></label>
+
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="enabled" ng-disabled="shouldDisable(selectedUser)"
+                                          ng-model="selectedUser.enabled"/></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" translate="users.rolesLabel" ng-if="allOrgRoles.length"></label>
+
+                    <div class="col-sm-9">
+                        <div>
+                            <table>
+                                <tr ng-repeat="rolesInRow in allOrgRoles">
+                                    <td style="padding-right: 5px;" ng-repeat="role in rolesInRow">
+                                        <div style="white-space:nowrap" class="checkbox">
+                                            <label>
+                                                <input type="checkbox" ng-disabled="shouldDisableRole(selectedUser, role)"
+                                                       ng-model="role.isAssignedToUser"/>{{role.displayedName}}
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div style="clear: both;">
+        <span class="note-message" translate="LAST_LOGIN_MESSAGE" translate-values="{date:selectedUser.lastLogin}" ng-show="selectedUser.lastLogin && selectedUser.lastLogin.length>0"></span>
+        <!--<span class="note-message" translate="LAST_LOGIN_MESSAGE" translate-values="{date:selectedUser.lastLogin}" ></span>-->
+        <a style="float: right;" href="" translate="users.resendEmail" ng-click="onResendActivationEmail()" ng-show="selectedUser.state=='PENDING' && (isUserWithRole('USER_MANAGER') || isUserWithRole('SERVICE_ADMIN'))"></a>
+    </div>
+</div>
+
