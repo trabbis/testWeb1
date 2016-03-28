@@ -21,6 +21,28 @@
          	arr.push(1);
          	console.log(arr);
          
+         	var arr2 = ['a', 'b', 'c', 'd', 'e'];
+         	var test1 = arr2.splice(4,1); //removing and adding
+         	console.log(arr2);
+         	console.log(test1);
+         	
+
+         	//about constructor
+         	//https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword
+         	var Vehicle = function() {};
+         	//or 
+         	var test2 = new Vehicle();
+         	console.log("constructor");
+         	
+         	//02. adding data into array
+         	var arr3 = [];
+         	arr3[1] = 1;
+         	arr3[3] = 3;
+         	console.log(arr3); //there is two elements and two undefined
+         	console.log(arr3.length); //size is still fourth
+         	
+         	
+
       </script>
       
    </body>

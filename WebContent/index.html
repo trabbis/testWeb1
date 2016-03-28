@@ -16,78 +16,6 @@
          }
          document.write("Total Hits :" + sessionStorage.hits );
          
-         
-         
-         var fn = function(params) {
-        	 	//a : 'test1',
-        	 	
-        	    return function jQueryLikeParamSerializer(params) {
-        	      if (!params) return '';
-        	      
-        	      console.log("testing...");
-        	      var parts = [];
-        	      serialize(params, '', true);
-        	      return parts.join('&');
-
-        	      function serialize(toSerialize, prefix, topLevel) {
-        	        if (toSerialize === null || isUndefined(toSerialize)) return;
-        	        if (isArray(toSerialize)) {
-        	          forEach(toSerialize, function(value, index) {
-        	            serialize(value, prefix + '[' + (isObject(value) ? index : '') + ']');
-        	          });
-        	        } else if (isObject(toSerialize) && !isDate(toSerialize)) {
-        	          forEachSorted(toSerialize, function(value, key) {
-        	            serialize(value, prefix +
-        	                (topLevel ? '' : '[') +
-        	                key +
-        	                (topLevel ? '' : ']'));
-        	          });
-        	        } else {
-        	          parts.push(encodeUriQuery(prefix) + '=' + encodeUriQuery(serializeValue(toSerialize)));
-        	        }
-        	      }
-        	    };
-        	    
-        	  };
-
-        	  
-      	    var test4 = function (params) {
-      	      if (!params) return '';
-      	      
-      	      console.log("testing...");
-      	      var parts = [];
-      	      serialize(params, '', true);
-      	      return parts.join('&');
-
-      	      function serialize(toSerialize, prefix, topLevel) {
-      	        if (toSerialize === null || angular.isUndefined(toSerialize)) return;
-      	        if (angular.isArray(toSerialize)) {
-      	          forEach(toSerialize, function(value, index) {
-      	            serialize(value, prefix + '[' + (isObject(value) ? index : '') + ']');
-      	          });
-      	        } else if (angular.isObject(toSerialize) && !angular.isDate(toSerialize)) {
-      	          angular.forEach(toSerialize, function(value, key) {
-      	            serialize(value, prefix +
-      	                (topLevel ? '' : '[') +
-      	                key +
-      	                (topLevel ? '' : ']'));
-      	          });
-      	        } else {
-      	          parts.push(encodeUriQuery(prefix) + '=' + encodeUriQuery(serializeValue(toSerialize)));
-      	        }
-      	      }
-      	    };
-        	  
-        	  
-//        	  arg1 = {"page":1,"rowsPerPage":10,"filter":{storeId : 1},"orgId":2,"groupId":39,"initialLoad":true,"selectionValuesOnPage":[]}
-        	  arg1 = {"page":1,"rowsPerPage":10};
-        	  
-//				fn().call(test1);
-			var test2 = fn(arg1);
-				
-			test4(arg1);
-        	  
-         
       </script>
 	
       <p>Refresh the page to increase number of hits.</p>
@@ -96,8 +24,14 @@
       <a href="test2.html">WebSocket Test</a><br>
       <a href="test4.html">WebSocket Test2</a><br>
       <a href="test5.html">Array Test</a><br>
+      <a href="angular01/test6.html">Anguluar01 - directive</a><br>
+
+
 
    </body>
+   
+   
+   
 </html>
 
 
