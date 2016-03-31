@@ -7,7 +7,15 @@
    
       <script type="text/javascript">
       
+      //array join
+      var arr5 = [''];
+      console.log(arr5.join(','));
+      var arr4 = ['abc'];
+      console.log(arr4.join(','));
+      
+      
       //closure example02
+      /*
     	for (var i = 0; i < 5; i++) {
 		  setTimeout(function() { console.log(i + "closure"); }, i * 1000 );
 		}
@@ -17,8 +25,9 @@
     	    	setTimeout(function() { console.log(x + "closure2"); }, x * 1000 );
     	    })(i);
     	}
-      
+      */
 	//closure example01
+	/*
       var globalVar = "xyz";
 
       (function outerFunc(outerArg) {
@@ -36,7 +45,7 @@
           
         })(456);
       })(123);
-
+*/
       
       
 		//javascript type conversion
@@ -49,16 +58,11 @@
 
 
       
+		//03. array
 			var numbers = new Array(1, 4, 9);
 	         
 	        var length = numbers.push(10);
 	        document.write("new numbers is : " + numbers ); 
-	         
-	        length = numbers.push(20);
-	        document.write("<br />new numbers is : " + numbers ); 
-	
-	        numbers.push([]);
-	        document.write("<br />new numbers is : " + numbers ); 
 
 			var arr= [];
          	arr.push(1);
@@ -70,20 +74,19 @@
          	console.log(test1);
          	
 
-         	//about constructor
+         	//02. about constructor
          	//https://blog.pivotal.io/labs/labs/javascript-constructors-prototypes-and-the-new-keyword
          	var Vehicle = function() {};
          	//or 
          	var test2 = new Vehicle();
          	console.log("constructor");
          	
-         	//02. adding data into array
+         	//01. adding data into array
          	var arr3 = [];
          	arr3[1] = 1;
          	arr3[3] = 3;
          	console.log(arr3); //there is two elements and two undefined
-         	console.log(arr3.length); //size is still fourth
-         	
+         	console.log(arr3.length); //size is still four
          	
 
       </script>
