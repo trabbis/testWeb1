@@ -20,6 +20,7 @@
 		  setTimeout(function() { console.log(i + "closure"); }, i * 1000 );
 		}
       
+        //To fix the above problem, define inner function passing variable i
     	for (var i = 0; i < 5; i++) {
     		(function(x) {
     	    	setTimeout(function() { console.log(x + "closure2"); }, x * 1000 );
