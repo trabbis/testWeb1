@@ -7,6 +7,26 @@
    
       <script type="text/javascript">
       
+      //how this works in javascript
+      //works based on how it is called, not how it is defined
+		var fullname = 'John Doe';
+		var obj = {
+		   fullname: 'Colin Ihrig',
+		   prop: {
+		      fullname: 'Aurelio De Rosa',
+		      getFullname: function() {
+		         return this.fullname;
+		      }
+		   }
+		};
+		console.log(obj.prop.getFullname()); //print 'Aurelio De Rosa'
+		
+		var test = obj.prop.getFullname; 
+		console.log(test()); //print 'John Doe'
+		console.log(test.call(obj.prop));  //print 'Aurelio De Rosa'
+		
+
+      
       //array join
       var arr5 = [''];
       console.log(arr5.join(','));
