@@ -3,6 +3,7 @@
 // You can run this
 
 // Create a module
+
 var hippo = angular.module('hippo', []);
 
 // Register an object provider
@@ -19,3 +20,5 @@ var injector = angular.injector(['hippo', 'ng']);
 injector.invoke(function(awesome) {
     console.log('awesome == ' + awesome);
 });
+
+
