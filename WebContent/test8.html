@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>iframe testing</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//window.open('https://localhost:6443/alerts/', '_blank');
+	 	//https://localhost:6443/alerts/app/
+		
+	 	//Embedding iframe
+		var ifr = document.createElement("iframe");
+		ifr.src = '/alerts/';
+		ifr.style.width = "100px";
+		ifr.style.height = "100px";
+//         ifr.name = "testIframe";
+	 	document.body.appendChild(ifr);
+	 
+	</script>
+
+</body>
+</html>
